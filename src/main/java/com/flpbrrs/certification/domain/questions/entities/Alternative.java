@@ -1,4 +1,4 @@
-package com.flpbrrs.certification.domain.entities;
+package com.flpbrrs.certification.domain.questions.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
