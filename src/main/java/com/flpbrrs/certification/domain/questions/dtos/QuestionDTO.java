@@ -1,5 +1,6 @@
 package com.flpbrrs.certification.domain.questions.dtos;
 
+import com.flpbrrs.certification.infra.validations.assertOneTrue.AssertOneAlternativeTrue;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +21,7 @@ public class QuestionDTO {
     @NotBlank(message = "The technology field cannot be blank")
     private String technology;
     @NotNull
-    @Size(min = 4, message = "At least four alternatives")
+    @Size(min = 4, max = 4, message = "Each question must have 4 alternatives")
+    @AssertOneAlternativeTrue(message = "One alternative must be true")
     private List<AlternativeDTO> alternatives;
 }
