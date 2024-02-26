@@ -1,5 +1,7 @@
 package com.flpbrrs.certification.domain.questions.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,6 +23,8 @@ public class Alternative {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "question_id")
+    @JsonIgnoreProperties(value = { "alternatives" ,"hibernateLazyInitializer", "handler" }, allowSetters = true)
+    @JsonBackReference
     private Question question;
 
     @Column(name = "is_correct")

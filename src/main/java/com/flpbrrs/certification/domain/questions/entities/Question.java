@@ -1,5 +1,7 @@
 package com.flpbrrs.certification.domain.questions.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -26,7 +28,10 @@ public class Question {
     @Column(length = 50)
     private String technology;
 
+    @ToString.Exclude
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "question", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(value = { "question" ,"hibernateLazyInitializer", "handler" }, allowSetters = true)
+    @JsonManagedReference
     private List<Alternative> alternatives;
 
     @CreationTimestamp
