@@ -8,9 +8,9 @@ import java.util.UUID;
 
 public interface QuestionServicesIntf {
     public List<Question> listAll();
-    public Question createQuestion(QuestionDTO data);
+    public Question createQuestion(Question question);
 
-    public Question uodateQuestion(QuestionDTO data);
+    public Question updateQuestion(Question data);
 
     public void deleteQuestion(UUID questionId);
 }

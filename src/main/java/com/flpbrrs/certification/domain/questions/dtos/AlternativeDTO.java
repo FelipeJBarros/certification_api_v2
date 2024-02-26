@@ -1,11 +1,10 @@
 package com.flpbrrs.certification.domain.questions.dtos;
 
+import com.flpbrrs.certification.domain.questions.entities.Question;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -13,6 +12,5 @@ import java.util.UUID;
 @Builder
 public class AlternativeDTO {
     private String description;
-    private UUID questionId;
-    private boolean isCorrect;
+    private Boolean isCorrect;
 }
