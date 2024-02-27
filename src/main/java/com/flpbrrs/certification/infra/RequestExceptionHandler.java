@@ -1,10 +1,12 @@
 package com.flpbrrs.certification.infra;
 
 import com.flpbrrs.certification.infra.dtos.FieldValidationErrorDTO;
+import com.flpbrrs.certification.infra.dtos.NotReadableDTO;
 import com.flpbrrs.certification.infra.dtos.RequestExceptionHandlerDTO;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -35,5 +37,14 @@ public class RequestExceptionHandler {
                 .build();
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<NotReadableDTO> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
+        var notReadableError = NotReadableDTO.builder()
+                .message("Verify your JSON. Malformed request.")
+                .cause(ex.getMessage().split(":")[0])
+                .build();
+        return ResponseEntity.badRequest().body(notReadableError);
     }
 }
