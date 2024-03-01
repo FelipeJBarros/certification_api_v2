@@ -8,6 +8,8 @@ import java.util.UUID;
 
 public interface QuestionServicesIntf {
     public List<Question> listAll();
+
+    public List<Question> getQuestionsByTechnology(String technology);
     public Question createQuestion(Question question);
 
     public Question updateQuestion(Question data);

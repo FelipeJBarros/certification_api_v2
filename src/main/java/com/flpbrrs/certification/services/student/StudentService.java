@@ -42,4 +42,9 @@ public class StudentService implements StudentServicesIntf{
     public Optional<Student> getStudentById(UUID id) {
         return this.studentRepository.findById(id);
     }
+
+    @Override
+    public Optional<Student> getStudentByEmail(String email) {
+        return this.studentRepository.findByEmail(email);
+    }
 }

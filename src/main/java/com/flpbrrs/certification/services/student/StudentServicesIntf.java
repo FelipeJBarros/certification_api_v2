@@ -15,4 +15,6 @@ public interface StudentServicesIntf {
 
     Optional<Student> getStudentById(UUID id);
 
+    Optional<Student> getStudentByEmail(String email);
+
 }

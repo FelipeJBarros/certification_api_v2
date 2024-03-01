@@ -22,6 +22,11 @@ public class QuestionServiceImpl implements QuestionServicesIntf{
     }
 
     @Override
+    public List<Question> getQuestionsByTechnology(String technology) {
+        return this.questionRepository.findByTechnology(technology);
+    }
+
+    @Override
     public Question createQuestion(Question question) {
         return this.questionRepository.save(question);
     }
