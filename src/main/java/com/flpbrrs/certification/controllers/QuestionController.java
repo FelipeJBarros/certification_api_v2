@@ -2,8 +2,6 @@ package com.flpbrrs.certification.controllers;
 
 import com.flpbrrs.certification.domain.questions.dtos.QuestionDTO;
 import com.flpbrrs.certification.domain.questions.dtos.ResponseQuestionDTO;
-import com.flpbrrs.certification.domain.questions.entities.Alternative;
-import com.flpbrrs.certification.domain.questions.entities.Question;
 import com.flpbrrs.certification.services.alternative.AlternativeServiceImpl;
 import com.flpbrrs.certification.services.question.QuestionServices;
 import jakarta.validation.Valid;
@@ -30,28 +28,9 @@ public class QuestionController {
         return ResponseEntity.ok(questions);
     }
     @PostMapping
-    public ResponseEntity<Question> createQuestion(@Valid @RequestBody QuestionDTO data) {
-        var dtoToQuestion = Question.builder()
-                .description(data.getDescription())
-                .technology(data.getTechnology())
-                .build();
+    public ResponseEntity<ResponseQuestionDTO> createQuestion(@Valid @RequestBody QuestionDTO data) {
+        ResponseQuestionDTO question = this.questionService.createQuestion(data);
 
-        var question = this.questionService.createQuestion(dtoToQuestion);
-
-        var alternativeList = data.getAlternatives().stream().map(alternativeDTO -> {
-            return Alternative.builder()
-                    .question(question)
-                    .description(alternativeDTO.getDescription())
-                    .isCorrect(alternativeDTO.getIsCorrect())
-                    .build();
-        }).toList();
-
-        var alternatives = this.alternativeService.createAll(alternativeList);
-
-        question.setAlternatives(alternatives);
-
-        var finalQuestion = this.questionService.updateQuestion(question);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(finalQuestion);
+        return ResponseEntity.status(HttpStatus.CREATED).body(question);
     }
 }

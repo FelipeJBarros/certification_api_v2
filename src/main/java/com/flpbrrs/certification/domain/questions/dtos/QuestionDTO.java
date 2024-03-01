@@ -1,5 +1,6 @@
 package com.flpbrrs.certification.domain.questions.dtos;
 
+import com.flpbrrs.certification.domain.questions.entities.Question;
 import com.flpbrrs.certification.infra.validations.assertOneTrue.AssertOneAlternativeTrue;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -24,4 +25,11 @@ public class QuestionDTO {
     @Size(min = 4, max = 4, message = "Each question must have 4 alternatives")
     @AssertOneAlternativeTrue(message = "One alternative must be true")
     private List<AlternativeDTO> alternatives;
+
+    public Question toQuestion() {
+        return Question.builder()
+                .description(this.getDescription())
+                .technology(this.getTechnology())
+                .build();
+    }
 }
