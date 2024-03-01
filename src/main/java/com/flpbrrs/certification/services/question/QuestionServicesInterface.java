@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.UUID;
 
 public interface QuestionServicesInterface {
-    public List<ResponseQuestionDTO> listQuestionsByTechnology(String technology);
+    List<ResponseQuestionDTO> listQuestionsByTechnology(String technology);
 
-    public Question createQuestion(Question question);
+    Question createQuestion(Question question);
 
-    public Question updateQuestion(Question data);
+    Question updateQuestion(Question data);
 
-    public void deleteQuestion(UUID questionId);
+    void deleteQuestion(UUID questionId);
 }

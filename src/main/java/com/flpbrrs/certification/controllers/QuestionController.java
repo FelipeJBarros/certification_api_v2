@@ -1,7 +1,6 @@
 package com.flpbrrs.certification.controllers;
 
 import com.flpbrrs.certification.domain.questions.dtos.QuestionDTO;
-import com.flpbrrs.certification.domain.questions.dtos.ResponseAlternativeDTO;
 import com.flpbrrs.certification.domain.questions.dtos.ResponseQuestionDTO;
 import com.flpbrrs.certification.domain.questions.entities.Alternative;
 import com.flpbrrs.certification.domain.questions.entities.Question;
