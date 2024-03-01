@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -46,5 +47,15 @@ public class RequestExceptionHandler {
                 .cause(ex.getMessage().split(":")[0])
                 .build();
         return ResponseEntity.badRequest().body(notReadableError);
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<NotReadableDTO> handleMissingRequestParameter(MissingServletRequestParameterException ex) {
+        return ResponseEntity.badRequest().body(
+                NotReadableDTO.builder()
+                        .message("Verify your request. Malformed request.")
+                        .cause(ex.getMessage())
+                        .build()
+        );
     }
 }
