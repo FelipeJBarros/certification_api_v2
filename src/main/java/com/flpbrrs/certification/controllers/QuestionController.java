@@ -7,6 +7,7 @@ import com.flpbrrs.certification.domain.questions.entities.Question;
 import com.flpbrrs.certification.services.alternative.AlternativeServiceImpl;
 import com.flpbrrs.certification.services.question.QuestionServices;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +24,8 @@ public class QuestionController {
         this.alternativeService = alternativeService;
         this.questionService = questionService;
     }
-    @GetMapping("/{technology}")
-    public ResponseEntity<List<ResponseQuestionDTO>> listQuestionsByTech(@PathVariable String technology) {
+    @GetMapping
+    public ResponseEntity<List<ResponseQuestionDTO>> listQuestionsByTech(@RequestParam @NotBlank String technology) {
         var questions = this.questionService.listQuestionsByTechnology(technology);
         return ResponseEntity.ok(questions);
     }
